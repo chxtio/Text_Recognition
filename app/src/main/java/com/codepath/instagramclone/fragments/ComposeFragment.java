@@ -79,6 +79,7 @@ public class ComposeFragment extends Fragment {
     private File photoFile;
     public String photoFileName = "photo.jpg";
     private Bitmap OCRBitmap; //ML
+    private String textExtraction;
     private GraphicOverlay mGraphicOverlay;
 
 
@@ -142,7 +143,7 @@ public class ComposeFragment extends Fragment {
                 }
 
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(description, currentUser, photoFile);
+                savePost(description, currentUser, photoFile, textExtraction);
             }
         });
     }
@@ -180,6 +181,7 @@ public class ComposeFragment extends Fragment {
     private void processTextRecognitionResults(Text text) {
         myTextView.setText(null);
         List<Text.TextBlock> blocks = text.getTextBlocks();
+        textExtraction = "";
 
         if (blocks.size() == 0) {
             myTextView.setText(R.string.no_text);
@@ -188,6 +190,7 @@ public class ComposeFragment extends Fragment {
 
         for (Text.TextBlock block : blocks) {
             myTextView.append(block.getText());
+            textExtraction += block.getText();
         }
 
         mGraphicOverlay.clear();
@@ -332,11 +335,12 @@ public class ComposeFragment extends Fragment {
     }
 
     // Save post in backend
-    private void savePost(String description, ParseUser currentUser, File photoFile) {
+    private void savePost(String description, ParseUser currentUser, File photoFile, String extracted_text) {
         Post post = new Post();
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
+        post.setExtractedText(extracted_text);
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {

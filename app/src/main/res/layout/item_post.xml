@@ -17,7 +17,7 @@
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="500dp"
         android:scaleType="centerCrop"
         tools:srcCompat="@drawable/ic_baseline_android_24" />
 
@@ -27,4 +27,11 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         tools:text="I am a bot." />
+
+    <TextView
+        android:id="@+id/tvExtracted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        tools:text="Extracted Text." />
 </LinearLayout>

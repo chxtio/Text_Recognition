@@ -12,6 +12,7 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE = "image";
     public static final String KEY_USER="user";
     public static final String KEY_CREATED_KEY = "createdAt";
+    public static final String KEY_EXTRACTED = "extractedText";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -36,4 +37,10 @@ public class Post extends ParseObject {
     public void setUser(ParseUser user) {
         put(KEY_USER, user);
     }
+
+    public String getExtractedText() {
+        return getString(KEY_EXTRACTED);
+    }
+
+    public void setExtractedText(String text) { put(KEY_EXTRACTED, text); }
 }
